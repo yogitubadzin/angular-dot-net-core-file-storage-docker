@@ -5,11 +5,8 @@ namespace FilesStorage.Api.Write.Commands.AddFile
 {
     public class AddFileCommand : IRequest<Unit>
     {
-        public IFormFile File { get; }
+        public IFormFile File { get; set; }
 
-        public AddFileCommand(IFormFile file)
-        {
-            File = file;
-        }
+        public string Description { get; set; }
     }
 }

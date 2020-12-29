@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,7 +30,7 @@ namespace FilesStorage.Api.Read
                         .AllowAnyMethod();
                 });
             });
-            services.AddMvc();
+            services.AddMvc().AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddMediatR(typeof(Startup));
         }
 
@@ -40,6 +41,8 @@ namespace FilesStorage.Api.Read
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("default");
 
             app.UseHttpsRedirection();
 

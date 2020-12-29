@@ -22,7 +22,7 @@ namespace FilesStorage.Api.Write.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(AddFileCommand command)
+        public async Task<IActionResult> Post([FromForm] AddFileCommand command)
         {
             return await HandleAsync(command);
         }

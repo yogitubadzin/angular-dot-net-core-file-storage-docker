@@ -7,9 +7,12 @@ import { map } from 'rxjs/operators';
 export class FileUploadService {
     constructor(private httpClient: HttpClient) { }
 
-    postFile(fileToUpload: File): Observable<boolean> {
+    postFile(fileToUpload: File, descriptionText: string): Observable<boolean> {
         const formData: FormData = new FormData();
         formData.append('file', fileToUpload, fileToUpload.name);
+        if (descriptionText) {
+            formData.append('description', descriptionText);
+        }
         return this.httpClient
             .post('https://localhost:5006/files', formData)
             .pipe(map(() => { return true; }));

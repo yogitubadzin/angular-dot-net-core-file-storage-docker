@@ -1,9 +1,15 @@
+using FilesStorage.Api.Write.Commands.AddFile;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 
 namespace FilesStorage.Api.Write
 {
@@ -29,7 +35,7 @@ namespace FilesStorage.Api.Write
                         .AllowAnyMethod();
                 });
             });
-            services.AddMvc();
+            services.AddMvc().AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddMediatR(typeof(Startup));
         }
 
@@ -40,6 +46,18 @@ namespace FilesStorage.Api.Write
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseExceptionHandler(a => a.Run(async context =>
+            {
+                var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+                var exception = exceptionHandlerPathFeature.Error;
+
+                var result = JsonConvert.SerializeObject(new { error = exception.Message });
+                context.Response.ContentType = "application/json";
+                await context.Response.WriteAsync(result);
+            }));
+
+            app.UseCors("default");
 
             app.UseHttpsRedirection();
 
