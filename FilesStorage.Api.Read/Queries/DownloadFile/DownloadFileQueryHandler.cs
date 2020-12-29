@@ -8,7 +8,10 @@ namespace FilesStorage.Api.Read.Queries.DownloadFile
     {
         public async Task<DownloadFileQueryResponse> Handle(DownloadFileQuery request, CancellationToken cancellationToken)
         {
-            return await Task.FromResult(new DownloadFileQueryResponse(new FileContent()));
+            return await Task.FromResult(new DownloadFileQueryResponse(new FileContent
+            {
+                Bytes = new byte[3]
+            }));
         }
     }
 }

@@ -17,21 +17,20 @@ namespace FilesStorage.Api.Read.Controllers
         {
         }
 
-        [Route("files")]
         [HttpGet]
         public async Task<IActionResult> GetFiles()
         {
             return await HandleAsync(new GetFilesQuery());
         }
 
-        [Route("files/{id}")]
+        [Route("{id}")]
         [HttpGet]
         public async Task<IActionResult> GetFileDetails(Guid? id)
         {
             return await HandleAsync(new GetFileDetailsQuery(id));
         }
 
-        [Route("files/{id}/download")]
+        [Route("{id}/download")]
         [HttpGet]
         public async Task<IActionResult> DownloadFile(Guid? id)
         {

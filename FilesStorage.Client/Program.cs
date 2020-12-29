@@ -17,7 +17,7 @@ namespace FilesStorage.Client
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseContentRoot(Directory.GetCurrentDirectory())
-                        .UseUrls("https://0.0.0.0:443/")
+                        //.UseUrls("https://0.0.0.0:443/")
                         .UseStartup<Startup>();
                 });
         }

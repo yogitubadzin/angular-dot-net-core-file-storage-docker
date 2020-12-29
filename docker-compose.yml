@@ -1,0 +1,26 @@
+version: '3'
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - POSTGRES_PASSWORD=postgres_password
+  redis:
+    image: 'redis:latest'
+  client:
+    build:
+      dockerfile: Dockerfile      
+      context: ./FileStorage.Client
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=https://0.0.0.0:443
+      - ASPNETCORE_HTTPS_PORT=5001
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/certificate.pfx
+    ports:
+      - "5000:80"
+      - "5001:443"     
+    volumes:
+      - ./FileStorage.Client:/app/publish
+      - ${APPDATA}/Microsoft/UserSecrets/:/root/.microsoft/usersecrets
+      - ${APPDATA}/ASP.NET/Https:/https:ro      
+      - /app/ClientApp/node_modules

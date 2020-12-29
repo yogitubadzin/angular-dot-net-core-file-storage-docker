@@ -14,6 +14,13 @@ namespace FilesStorage.Api.Write.Controllers
         {
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var result = await Task.FromResult("test");
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(AddFileCommand command)
         {

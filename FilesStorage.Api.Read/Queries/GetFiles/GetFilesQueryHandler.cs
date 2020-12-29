@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -9,7 +10,14 @@ namespace FilesStorage.Api.Read.Queries.GetFiles
     {
         public Task<GetFilesQueryResponse> Handle(GetFilesQuery request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(new GetFilesQueryResponse(new List<File>()));
+            return Task.FromResult(new GetFilesQueryResponse(new List<File>
+            {
+                new File
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Name1"
+                }
+            }));
         }
     }
 }
