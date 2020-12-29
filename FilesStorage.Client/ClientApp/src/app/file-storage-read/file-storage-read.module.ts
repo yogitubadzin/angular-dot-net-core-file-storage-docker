@@ -6,7 +6,6 @@ import { FileDownloadComponent } from './file-download/file-download.component';
 import { FileDetailsComponent } from './file-details/file-details.component';
 import { FileListComponent } from './file-list/file-list.component';
 
-
 @NgModule({
   declarations: [FileDownloadComponent, FileDetailsComponent, FileListComponent],
   imports: [

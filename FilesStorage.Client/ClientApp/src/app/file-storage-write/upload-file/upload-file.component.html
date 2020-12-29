@@ -1,14 +1,13 @@
-<p>Upload file!</p>
+<h2>Upload file</h2>
 
-
+<form [formGroup]="uploadFileForm" (ngSubmit)="onSubmit()">
 <div class="form-group">
     <label for="file">Choose File</label>
-    <input type="file"
-           id="file"
-           (change)="handleFileInput($event.target.files)">
+    <input type="file" id="file" (change)="handleFileInput($event.target.files)">
 </div>
+<button class="button" type="submit">Upload</button>
+</form>
 
-
-<div *if="isSuccess">
+<div *ngIf="isSuccess">
     File was uploaded!
 </div>
