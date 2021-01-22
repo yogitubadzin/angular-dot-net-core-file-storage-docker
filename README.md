@@ -1,3 +1,3 @@
-# angular-dot-net-core-file-storage-docker
+# File Storage Docker
 
 App is not finished yet
